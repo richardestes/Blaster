@@ -6,9 +6,10 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
-#include "Components/InputComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Components/InputComponent.h"
+#include "Components/WidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 ABlasterCharacter::ABlasterCharacter()
@@ -26,6 +27,9 @@ ABlasterCharacter::ABlasterCharacter()
 
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
+	
+	OverheadWidgetRoleName = CreateDefaultSubobject<UWidgetComponent>(TEXT("OverheadWidgetRoleName"));
+	OverheadWidgetRoleName->SetupAttachment(RootComponent);
 }
 
 void ABlasterCharacter::BeginPlay()
@@ -39,7 +43,6 @@ void ABlasterCharacter::BeginPlay()
 			Subsystem->AddMappingContext(BlasterCharacterContext, 0);
 		}
 	}
-
 }
 
 void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
